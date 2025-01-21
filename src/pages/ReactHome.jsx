@@ -9,7 +9,7 @@ function ReactHome() {
 
   // <> is React.Fragment shorthand, like wrapping in a <div> but without adding the extra div to the DOM
   return (
-    <MainLayout> 
+    <MainLayout title="React Home | MyPage"> 
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
