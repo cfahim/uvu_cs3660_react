@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import ReactHome from './pages/ReactHome';
 import About from './pages/About';
+import NotFound from './pages/NotFound';
 
-const NotFound = () => <h1>404 - Not Found</h1>;
 
 function App() {
   return (
