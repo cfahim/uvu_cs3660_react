@@ -2,12 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import uvuLogo from '../assets/utah-valley-university.svg';
 
+const WORDPRESS_IMAGES = {
+    uvulogo: "https://www.prof-fahim.online/cs3660wp/wp-content/uploads/2025/01/utah-valley-university.svg",
+};
+
 const MainNav = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
-                    <img src={uvuLogo} alt="Logo" width="75" height="24" className="d-inline-block" />
+                    <img src={WORDPRESS_IMAGES.uvulogo} alt="Logo" width="75" height="24" className="d-inline-block" />
                     <span className="ms-2">Demo React App</span>
                 </Link>
                 <button
@@ -31,6 +35,11 @@ const MainNav = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/about">
                                 About
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/bootstrap">
+                                Bootstrap Demo
                             </Link>
                         </li>
                         <li className="nav-item">
