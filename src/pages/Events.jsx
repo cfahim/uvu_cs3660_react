@@ -1,5 +1,6 @@
 import React from "react";
 import MainLayout from "./layouts/MainLayout";
+import { useEffect, useState } from "react";
 
 
 const EasyButton = () => {
@@ -40,7 +41,45 @@ const preventContextMenu = (event) => {
     alert("Right Click Disabled!");
 }
 
+
+const UseEffectRenderAndMount = ({ id }) => {
+    const [renderCount, setRenderCount] = useState(1);
+  
+    useEffect(() => {
+      console.log(`Component ${id} Mounted`);
+  
+      return () => {
+        console.log(`Component ${id} Unmounted`);
+      };
+    }, []);
+  
+    useEffect(() => {
+      console.log(`Component ${id} Rendered - Render Count: ${renderCount}`);
+    });
+  
+    return (
+      <div style={{ border: "1px solid black", padding: "10px", margin: "5px" }}>
+        <h2>Component {id}</h2>
+        <p>Renders: {renderCount}</p>
+        <button onClick={() => setRenderCount((prev) => prev + 1)}>Re-render</button>
+      </div>
+    );
+  };
+
+
 const Events = () => {
+    const [components, setComponents] = useState([]);
+
+    // Function to add a new component
+    const addComponent = () => {
+        setComponents((prev) => [...prev, <UseEffectRenderAndMount id={prev.length} key={prev.length} />]);
+    };
+
+    // Function to remove the most recently added component
+    const removeComponent = () => {
+        setComponents((prev) => prev.slice(0, -1));
+    };
+    
     return (
         <MainLayout title="Eventing | MyPage">
             <div className="container">
@@ -58,6 +97,16 @@ const Events = () => {
                     <div className="col" onContextMenu={preventContextMenu}>
                         <h2>Preventing Default</h2>
                         <EventPreventDefault />
+                    </div>
+                </div>
+                <div className="row">                    
+                    <div className="col">
+                        <h2>UseEffect Render and Mount</h2>
+                        <button className="btn btn-primary" onClick={addComponent}>Add Component</button>
+                        <button className="btn btn-danger" onClick={removeComponent} disabled={components.length === 0}>
+                            Remove Component
+                        </button>
+                        <div>{components}</div>
                     </div>
                 </div>
             </div>
