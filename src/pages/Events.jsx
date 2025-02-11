@@ -44,6 +44,17 @@ const preventContextMenu = (event) => {
 
 const UseEffectRenderAndMount = ({ id }) => {
     const [renderCount, setRenderCount] = useState(1);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+          console.log("Timer running...");
+        }, 1000);
+      
+        return () => {
+          clearInterval(timer); // Cleanup function
+          console.log("Timer stopped!");
+        };
+      }, []);
   
     useEffect(() => {
       console.log(`Component ${id} Mounted`);
