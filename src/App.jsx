@@ -7,7 +7,7 @@ import Events from './pages/Events';
 import Surprise from './pages/Surprise';
 import AuthRoute from './AuthRoute';
 import Login from './pages/Login';
-import Admin from './pages/Admin';
+import Admin from './pages/admin/Admin';
 
 
 function App() {

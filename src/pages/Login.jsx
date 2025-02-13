@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import MainLayout from "./layouts/MainLayout";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const { isLoggedIn, login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     // Redirect if token exists
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            navigate("/admin"); // Redirect to /admin if already logged in
+    useEffect(() => {        
+        if (isLoggedIn) {            
+            navigate("/admin");
         }
-    }, [navigate]);
+    }, [isLoggedIn, navigate]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,10 +25,11 @@ function Login() {
             return;
         }
 
-        // Fake authentication (replace with API call)
-        const fakeToken = { email, password };
-        localStorage.setItem("token", fakeToken); // Save token in localStorage
-        navigate("/admin"); // Redirect after login
+        // Fake authentication (replace with API call) with expiration time of 1 hour
+        if(login(email, password))
+            navigate("/admin"); // Redirect after login
+        else
+            setError("Invalid email or password!");
     };
 
     return (
