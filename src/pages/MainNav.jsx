@@ -1,12 +1,15 @@
-import React from "react";
+import { useContext, React } from "react";
 import { Link } from "react-router-dom";
-import uvuLogo from '../assets/utah-valley-university.svg';
+import { FaUserCircle } from "react-icons/fa"; // Import FontAwesome icon
+import { AuthContext } from "../context/AuthContext";
 
 const WORDPRESS_IMAGES = {
     uvulogo: "https://www.prof-fahim.online/cs3660wp/wp-content/uploads/2025/01/utah-valley-university.svg",
 };
 
 const MainNav = () => {
+    const { isLoggedIn, token, logout } = useContext(AuthContext);
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div className="container-fluid">
@@ -53,6 +56,21 @@ const MainNav = () => {
                             </Link>
                         </li>
                     </ul>
+                    <div className="ms-auto">
+                        {isLoggedIn ? (
+                            <div className="d-flex align-items-center">
+                                <FaUserCircle size={24} className="me-3" title={token?.username} />
+                                <span className="text-white me-2">{token?.username}</span>
+                                <button className="btn btn-danger" onClick={logout}>
+                                    Logout
+                                </button>
+                            </div>
+                        ) : (
+                            <Link className="nav-link text-white" to="/login">
+                                <FaUserCircle size={24} className="me-3" title="Login" />
+                            </Link>
+                        )}
+                    </div>
                 </div>
             </div>
         </nav>
