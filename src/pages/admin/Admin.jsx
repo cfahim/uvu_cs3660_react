@@ -1,15 +1,30 @@
-import { useContext, React } from "react";
+import { useContext } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { AuthContext } from "../../context/AuthContext";
+import AdminLayout from "../layouts/AdminLayout";
+import SWAPIFilms from "../swapi/SWAPIFilms";
 
 const Admin = () => {
-    const { token } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
-    return (
-        <MainLayout title="Admin | MyPage">
-            <h2>Welcome {token.username}</h2>
-        </MainLayout>
-    );
+  const renderContent = (activeItem) => {
+    switch (activeItem) {
+      case "Films":
+        return <SWAPIFilms />;
+      case "People":
+        return <h2>🧑 People Management</h2>;
+      default:
+        return <h2>📊 Welcome {token.username} to the Admin Panel</h2>;
+    }
+  };
+
+  return (
+    <MainLayout title="Admin | MyPage" showMain={false}>
+      <AdminLayout>
+        {(activeItem) => renderContent(activeItem)}
+      </AdminLayout>
+    </MainLayout>
+  );
 };
 
 export default Admin;
