@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = (username, password) => {
         const now = new Date();
-        const fakeToken = { username, password, expiration: now.setMinutes(now.getMinutes() + 1) };
+        const fakeToken = { username, password, expiration: now.setHours(now.getHours() + 1) };
         localStorage.setItem("token", JSON.stringify(fakeToken));
         setIsLoggedIn(true);
         setToken(fakeToken);
