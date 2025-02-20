@@ -73,7 +73,7 @@ const SWAPIFilms = () => {
                             <div className="card-body">
                                 <h5 className="card-title">Episode {film.episode_id}: {film.title}</h5>
                                 <p className="card-text text-muted">Released: {film.release_date}</p>
-                                <Link to={`/admin/films/${film.episode_id}`} className="btn btn-primary">{film.title}</Link>
+                                <Link to={`/admin/films/${film.episode_id >= 4 ? film.episode_id-3 : film.episode_id+3}`} className="btn btn-primary">{film.title}</Link>
                             </div>
                         </div>
                     </div>
