@@ -15,7 +15,7 @@ function AdminLayout({ children }) {
             <div className="col">
                 {/* Main Content */}
                 <main className="d-flex flex-column flex-grow-1 justify-content-center align-items-center" style={{height:"100%"}}>
-                    {children(activeItem)}
+                    {typeof children === "function" ? children(activeItem) : children}
                 </main>
             </div>
         </div>   

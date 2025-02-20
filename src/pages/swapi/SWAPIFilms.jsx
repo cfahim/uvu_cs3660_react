@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import SWAPIimageConfig from "../../configs/SWAPIImageConfig";
 
 
@@ -72,7 +73,7 @@ const SWAPIFilms = () => {
                             <div className="card-body">
                                 <h5 className="card-title">Episode {film.episode_id}: {film.title}</h5>
                                 <p className="card-text text-muted">Released: {film.release_date}</p>
-                                <a href="#" class="btn btn-primary">{film.title}</a>
+                                <Link to={`/admin/films/${film.episode_id}`} className="btn btn-primary">{film.title}</Link>
                             </div>
                         </div>
                     </div>

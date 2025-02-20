@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import MainLayout from "./layouts/MainLayout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 function Login() {
@@ -9,11 +9,15 @@ function Login() {
     const [error, setError] = useState("");
     const { isLoggedIn, login } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Get the original page the user tried to access
+    const from = location.state?.from?.pathname || "/admin";
 
     // Redirect if token exists
     useEffect(() => {        
         if (isLoggedIn) {            
-            navigate("/admin");
+            navigate(from, { replace: true }); // Redirect to the original route
         }
     }, [isLoggedIn, navigate]);
 
