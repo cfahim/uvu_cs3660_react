@@ -21,7 +21,17 @@ function AdminSideBar({ collapsed, setCollapsed, setActiveItem }) {
   };
 
   return (
-    <aside className="d-flex flex-column justify-content-center" style={{ height: "100%", backgroundColor: "#1d5f39" }}>
+    <aside className="d-flex flex-column justify-content-center" 
+    style={{
+      width: collapsed ? "60px" : "200px", // Fixed width (adjustable)
+      position: "fixed", // Stick to the left
+      top: 0, // Align to the top
+      left: 0, // Align to the left
+      backgroundColor: "#1d5f39",
+      overflow: "hidden", // Prevent growing
+      minHeight: "100%", // Ensures it stretches to content
+    }}
+    >
       <nav className="mb-4">
         <SidebarItem 
           icon={FaFilm} 

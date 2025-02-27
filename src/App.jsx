@@ -8,6 +8,7 @@ import Surprise from './pages/Surprise';
 import AuthRoute from './AuthRoute';
 import Login from './pages/Login';
 import Admin from './pages/admin/Admin';
+import SWAPIFilmDetails from './pages/admin/SWAPIFilmDetails';
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route element={<AuthRoute />}>
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/films/:filmId" element={<SWAPIFilmDetails />} />
+          <Route path="/admin" element={<Admin />} />          
         </Route>
 
         <Route path="*" element={<NotFound />} />
