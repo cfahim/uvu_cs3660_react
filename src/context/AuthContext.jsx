@@ -20,14 +20,36 @@ export const AuthProvider = ({ children }) => {
         }        
     }, []);
 
-    const login = (username, password) => {
-        const now = new Date();
-        const fakeToken = { username, password, expiration: now.setHours(now.getHours() + 1) };
-        localStorage.setItem("token", JSON.stringify(fakeToken));
-        setIsLoggedIn(true);
-        setToken(fakeToken);
-        return true;
-    }
+    const login = async (username, password) => {
+        try {
+            const response = await fetch("http://localhost:8000/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            });
+    
+            if (!response.ok) {
+                throw new Error("Invalid credentials");
+            }
+    
+            // If login is successful, store a fake token with expiration
+            const now = new Date();
+            const token = {
+                username,
+                expiration: now.setHours(now.getHours() + 1) // Expires in 1 hour
+            };
+    
+            localStorage.setItem("token", JSON.stringify(token));
+            setIsLoggedIn(true);
+            setToken(token);
+            return true;
+        } catch (error) {
+            console.error("Login failed:", error);
+            return false;
+        }
+    };
 
     const logout = () => {
         localStorage.removeItem("token");
