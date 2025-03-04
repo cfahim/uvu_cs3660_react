@@ -8,7 +8,7 @@ const WORDPRESS_IMAGES = {
 };
 
 const MainNav = () => {
-    const { isLoggedIn, token, logout } = useContext(AuthContext);
+    const { isLoggedIn, user, logout } = useContext(AuthContext);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -59,8 +59,8 @@ const MainNav = () => {
                     <div className="ms-auto">
                         {isLoggedIn ? (
                             <div className="d-flex align-items-center">
-                                <FaUserCircle size={24} className="me-3" title={token?.username} />
-                                <span className="text-white me-2">{token?.username}</span>
+                                <FaUserCircle size={24} className="me-3" title={user?.username} />
+                                <span className="text-white me-2">{user?.name}</span>
                                 <button className="btn btn-danger" onClick={logout}>
                                     Logout
                                 </button>
