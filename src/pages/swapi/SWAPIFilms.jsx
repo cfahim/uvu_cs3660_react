@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import SWAPIimageConfig from "../../configs/SWAPIImageConfig";
-
+import { AuthContext } from "../../context/AuthContext";
+import bffService from "../../services/bffService";
 
 const SWAPIFilms = () => {
+    const { token } = useContext(AuthContext);
     const [films, setFilms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -11,11 +13,9 @@ const SWAPIFilms = () => {
 
     useEffect(() => {
         const fetchFilms = async () => {
-            try {
-                const response = await fetch("https://swapi.dev/api/films/");
-                if (!response.ok) throw new Error("Failed to fetch films");
-                const data = await response.json();
-                setFilms(data.results);
+            try {       
+                const data = await bffService.getAllFilms(token);         
+                setFilms(data);
             } catch (err) {
                 setError(err.message);
             } finally {
