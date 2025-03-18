@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode"; // Install via: npm install jwt-decode
+import bffService from "../services/bffService";
 
 export const AuthContext = createContext(null);
 
@@ -46,21 +47,13 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username, password) => {
         try {
-            const response = await fetch("http://localhost:8000/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username, password })
-            });
-    
-            if (!response.ok) {
-                throw new Error("Invalid credentials");
+            const response = await bffService.login(username, password);           
+            if (response.success === false) {
+                throw new Error("Login failed unexpectedly");
             }
-
-            const loginResponse = await response.json();
-            const token = jwtDecode(loginResponse.jwt_token);            
-            localStorage.setItem("token", loginResponse.jwt_token);
+            
+            const token = jwtDecode(response.jwt_token);            
+            localStorage.setItem("token", response.jwt_token);
             setUser(token.user);
             setIsLoggedIn(true);
             setToken(token);
