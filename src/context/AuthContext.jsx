@@ -14,23 +14,14 @@ export const AuthProvider = ({ children }) => {
     
         if (token) {
             try {
-                const response = await fetch("http://localhost:8000/api/login/verify", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ jwt_token: token })
-                });
-                if (!response.ok) {
-                    throw new Error("Invalid token");
-                }
+                bffService.login_verify(token);
                 setIsLoggedIn(true);
                 const tokendecode = jwtDecode(token);
                 setUser(tokendecode.user);
                 setToken(token);
             } catch (error) {
                 console.error("Invalid token:", error);
-                logout(); // ✅ Invalid token, remove it
+                logout();
             }
         }
     };

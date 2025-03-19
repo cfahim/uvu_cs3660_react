@@ -7,6 +7,23 @@ const defaultHeaders = {
 };
 
 const bffService = {
+    login_verify: async (token) => {
+        try 
+        {
+            const response = await axios.post(`${BFF_BASE_URL}/login/verify/`, { 
+                    jwt_token: token 
+                }, {
+                    headers: defaultHeaders
+                });               
+            if (!response.ok) {
+                throw new Error("Invalid token");
+            }
+        }
+        catch (error) {
+            console.error("Login failed:", error);
+            throw new Error("Login failed");
+        }
+    },
     login: async (username, password) => {
         try {
             const response = await axios.post(`${BFF_BASE_URL}/login/`, {
