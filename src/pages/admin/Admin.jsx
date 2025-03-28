@@ -5,7 +5,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import SWAPIFilms from "../swapi/SWAPIFilms";
 
 const Admin = () => {
-  const { token } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const renderContent = (activeItem) => {
     switch (activeItem) {
@@ -14,7 +14,7 @@ const Admin = () => {
       case "People":
         return <h2>🧑 People Management</h2>;
       default:
-        return <h2>📊 Welcome {token.username} to the Admin Panel</h2>;
+        return <h2>📊 Welcome {user.name} to the Admin Panel</h2>;
     }
   };
 
