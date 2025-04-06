@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import SWAPIimageConfig from "../../configs/SWAPIImageConfig";
 import { AuthContext } from "../../context/AuthContext";
-import bffService from "../../services/bffService";
+import bffService from "../../services/BFFService";
 
 const SWAPIFilms = () => {
     const { token } = useContext(AuthContext);

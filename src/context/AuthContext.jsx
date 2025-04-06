@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode"; // Install via: npm install jwt-decode
-import bffService from "../services/bffService";
+import bffService from "../services/BFFService";
 
 export const AuthContext = createContext(null);
 
